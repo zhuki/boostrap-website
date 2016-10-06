@@ -6,7 +6,7 @@ else
 	echo "Creating Load Balancer. Website accessible from:"
 	aws elb create-load-balancer --load-balancer-name nxtGenBalancer --listeners Protocol=http,LoadBalancerPort=80,InstanceProtocol=http,InstancePort=80 --availability-zones "us-west-2b"
 	echo "Creating Load Blanacer Policy"
-	aws elb create-load-balancer-policy --load-balancer-name nxtGenBalancer --policy-name nxtGenBalancerPolicy --policy-type-name ProxyProtocolPolicyType --policy-attributes AttributeName=ProxyProtocol,AttributeValue=trueaws elb create-load-balancer-policy --load-balancer-name nxtGenBalancer --policy-name nxtGenBalancerPolicy --policy-type-name ProxyProtocolPolicyType --policy-attributes AttributeName=ProxyProtocol,AttributeValue=true
+	aws elb create-load-balancer-policy --load-balancer-name nxtGenBalancer --policy-name nxtGenBalancerPolicy --policy-type-name ProxyProtocolPolicyType --policy-attributes AttributeName=ProxyProtocol,AttributeValue=true
 	echo "Configuring the Launch Policy"
 	aws autoscaling create-launch-configuration --launch-configuration-name nxtGen_webserver --image-id $1 --key-name $2 --security-groups $3 --instance-type $4 --user-data file://installenv.sh --placement AvailabilityZone=us-west-2b --placement-tenancy default
 	echo "Configuring the Autoscale Group"
